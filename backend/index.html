@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Mercado de Valores</title>
+</head>
+<body>
+    <h1>Consulta de Mercado de Valores</h1>
+    <input type="text" id="symbol" placeholder="Ingresa el símbolo de la acción">
+    <button id="fetchStock">Consultar</button>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('fetchStock').addEventListener('click', async () => {
+            const symbol = document.getElementById('symbol').value;
+            const response = await fetch('http://localhost:5000/api/stocks', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ symbol }),
+            });
+
+            const data = await response.text();
+            document.getElementById('result').innerHTML = data;
+        });
+    </script>
+</body>
+</html>
