@@ -1,8 +1,8 @@
-// api/stocks.js
 require('dotenv').config();
 const mongoose = require('mongoose');
 const axios = require('axios');
 const Stock = require('../models/Stock'); // Ajusta la ruta según tu estructura de carpetas
+const cors = require('cors'); // Importa el paquete cors
 
 // Conexión a la base de datos
 const dbURI = process.env.MONGODB_URI || 'mongodb+srv://admin:admin@cluster0.orsoe1x.mongodb.net/stockAPI';
@@ -65,6 +65,17 @@ async function getStockData(symbol) {
 
 // Exportar funciones para manejar las solicitudes HTTP
 module.exports = async (req, res) => {
+    // Configura CORS para permitir solicitudes desde un origen específico
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Cambia '*' por tu dominio específico si lo deseas
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    if (req.method === 'OPTIONS') {
+        // Si la solicitud es OPTIONS, simplemente responde con un 200
+        res.status(200).end();
+        return;
+    }
+
     if (req.method === 'POST') {
         const { symbol } = req.body;
         try {
