@@ -7,6 +7,10 @@ const stockSchema = new mongoose.Schema({
     low: Number,
     price: Number,
     volume: Number,
+    timestamp: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 module.exports = mongoose.model('Stock', stockSchema);

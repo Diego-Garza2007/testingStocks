@@ -5,13 +5,13 @@ export const useStocks = {
   async fetchStock(symbol, stocks, setMessage) {
     try {
       const response = await api.addStock(symbol);
-      const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const fetchedTime = new Date(response.data.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
       // Agrega el nuevo stock a la lista
       const newStock = {
         symbol: symbol,
         price: response.data.price, // Asegúrate de que el API devuelve el precio
-        time: currentTime,
+        time: new Date(response.data.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), // Convierte el timestamp
       };
 
       stocks.push(newStock); // Agregar el nuevo stock aquí
@@ -32,7 +32,11 @@ export const useStocks = {
   async getStocks(setStocks, setMessage) {
     try {
       const response = await api.getStocks();
-      setStocks(response.data);
+      const stocksData = response.data.map(stock => ({
+        ...stock,
+        time: new Date(stock.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), // Convierte el timestamp
+      }));
+      setStocks(stocksData);
     } catch (error) {
       setMessage('Error al obtener los datos guardados.', 'error');
     }
