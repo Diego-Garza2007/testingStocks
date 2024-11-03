@@ -96,6 +96,12 @@ app.get('/api/stocks', async (req, res) => {
     }
 });
 
+// Ruta para obtener la IP pública de la aplicación
+app.get('/api/my-ip', (req, res) => {
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    res.json({ ip });
+});
+
 app.listen(PORT, () => {
     console.log(`Servidor en funcionamiento en el puerto ${PORT}`);
 });
