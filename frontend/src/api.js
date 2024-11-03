@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-    baseURL: 'http://localhost:5000/api', // Cambia esto si despliegas en otro servidor
+    baseURL: 'https://striking-joy.railway.app:8080/api', // Cambia esto si despliegas en otro servidor
     headers: {
         'Content-Type': 'application/json',
     },
