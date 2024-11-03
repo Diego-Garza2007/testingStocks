@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-    baseURL: 'https://striking-joy.railway.app/api', // Cambia esto si despliegas en otro servidor
+    baseURL: 'https://delighful-luck.railway.app/api', // Cambia esto si despliegas en otro servidor
     headers: {
         'Content-Type': 'application/json',
     },
