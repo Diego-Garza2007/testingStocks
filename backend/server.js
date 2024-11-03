@@ -8,13 +8,8 @@ const Stock = require('./models/Stock');
 const app = express();
 const PORT = process.env.PORT || 8080; // Ajustamos el puerto aquí
 
-// Configuración de CORS para permitir solo tu dominio de Vercel
-const corsOptions = {
-    origin: 'https://apibd-stocks.vercel.app/', // Cambia esto al dominio de tu frontend en Vercel
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-};
-app.use(cors(corsOptions));
+
+app.use(cors());
 app.use(express.json());
 
 // Conexión a la base de datos
