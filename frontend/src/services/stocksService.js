@@ -32,13 +32,22 @@ export const useStocks = {
   async getStocks(setStocks, setMessage) {
     try {
       const response = await api.getStocks();
+      
+      // Agrega el console.log dentro del bloque try
+      console.log("Datos obtenidos:", response.data);
+      
       const stocksData = response.data.map(stock => ({
         ...stock,
         time: new Date(stock.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), // Convierte el timestamp
       }));
+      
       setStocks(stocksData);
     } catch (error) {
-      setMessage('Error al obtener los datos guardados.', 'error');
+      console.error("Error al obtener los datos:", error.response ? error.response.data : error.message);
+      setMessage(error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : 'Error al obtener los datos guardados.', 'error');
     }
-  },
+  }
+  
 };

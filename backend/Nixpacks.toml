@@ -1,4 +1,0 @@
-# Nixpacks.toml
-[build]
-  # Este comando se ejecuta para instalar las dependencias
-  install = "npm ci --omit=dev"

@@ -1,8 +1,9 @@
 // src/api.js
+// :
 import axios from 'axios';
 
 const apiClient = axios.create({
-    baseURL: 'https://testingstocks-production.up.railway.app:5000/api', // Cambia esto si despliegas en otro servidor
+    baseURL: 'https://testingstocks-production.up.railway.app/api', // Cambia esto si despliegas en otro servidor
     headers: {
         'Content-Type': 'application/json',
     },
