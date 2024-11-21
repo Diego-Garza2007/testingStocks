@@ -21,7 +21,7 @@ export default {
     },
     async getStocks() {
       await useStocks.getStocks((data) => {
-        this.stocks = data.reverse();
+        this.stocks = data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
       }, this.setMessage);
     },
     validateInput() {

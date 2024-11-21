@@ -94,7 +94,7 @@ app.post('/api/stocks', async (req, res) => {
 app.get('/api/stocks', async (req, res) => {
     try {
         // Ordenamos los stocks por timestamp en orden descendente (más recientes primero)
-        const stocks = await Stock.find().sort({ timestamp: -1 });  // -1 indica orden descendente
+        const stocks = await Stock.find();  // -1 indica orden descendente
         res.json(stocks);
     } catch (error) {
         res.status(500).json({ message: error.message });
