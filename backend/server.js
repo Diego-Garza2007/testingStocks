@@ -14,7 +14,10 @@ app.use(express.json());
 
 // Conexión a la base de datos
 const dbURI = 'mongodb+srv://admin:admin@cluster0.orsoe1x.mongodb.net/stockAPI';
-mongoose.connect(dbURI)
+mongoose.connect(dbURI, {
+    useNewUrlParser: true, // Analizador de URI más robusto
+    useUnifiedTopology: true, // Activa el nuevo motor de monitoreo
+})
   .then(() => console.log('Conexión a MongoDB exitosa'))
   .catch((error) => console.error('Error al conectar a MongoDB:', error));
 
@@ -90,7 +93,8 @@ app.post('/api/stocks', async (req, res) => {
 // Ruta para obtener todos los stocks almacenados
 app.get('/api/stocks', async (req, res) => {
     try {
-        const stocks = await Stock.find();
+        // Ordenamos los stocks por timestamp en orden descendente (más recientes primero)
+        const stocks = await Stock.find().sort({ timestamp: -1 });  // -1 indica orden descendente
         res.json(stocks);
     } catch (error) {
         res.status(500).json({ message: error.message });

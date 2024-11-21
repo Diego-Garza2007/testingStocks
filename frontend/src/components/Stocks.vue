@@ -21,7 +21,7 @@ export default {
     },
     async getStocks() {
       await useStocks.getStocks((data) => {
-        this.stocks = data;
+        this.stocks = data.reverse();
       }, this.setMessage);
     },
     validateInput() {

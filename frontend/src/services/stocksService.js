@@ -23,6 +23,7 @@ export const useStocks = {
       if (error.response && error.response.data && error.response.data.message) {
         setMessage(error.response.data.message, 'error');
       } else {
+        console.error('Error inesperado:', error);
         setMessage('Error al obtener los datos de la acción.', 'error');
       }
       return false; // Indica que hubo un error
